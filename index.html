@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nasreen Fashion</title>
+<style>
+body{font-family:Arial;text-align:center;background:#fff0f5}
+h1{color:#d63384}
+.product{border:1px solid #ddd;margin:10px;padding:10px;border-radius:10px;background:white}
+button{background:#d63384;color:white;border:none;padding:10px 20px;border-radius:5px}
+#cart{background:#fff;margin:20px;padding:15px;border-radius:10px}
+</style>
+</head>
+<body>
+<h1>Nasreen Fashion 👗</h1>
+<div id="loginDiv">
+<input id="nameInput" placeholder="Enter your name"><br><br>
+<button onclick="login()">Login</button>
+</div>
+<div id="shopDiv" style="display:none">
+<p>Welcome, <span id="userName"></span>! <button onclick="logout()">Logout</button></p>
+<div class="product"><h3>Short Top - ₹499</h3><button onclick="addToCart('Short Top',499)">Add to Cart</button></div>
+<div class="product"><h3>Saree - ₹999</h3><button onclick="addToCart('Saree',999)">Add to Cart</button></div>
+<div class="product"><h3>Kurti - ₹699</h3><button onclick="addToCart('Kurti',699)">Add to Cart</button></div>
+<div id="cart"><h3>Cart 🛒</h3><p id="cartItems">Empty</p><p><b>Total: ₹<span id="total">0</span></b></p><button onclick="order()">Place Order (COD)</button></div>
+</div>
+<script>
+let cart=[],total=0;
+function login(){let n=document.getElementById('nameInput').value;if(n){localStorage.setItem('user',n);showShop();}}
+function showShop(){document.getElementById('loginDiv').style.display='none';document.getElementById('shopDiv').style.display='block';document.getElementById('userName').innerText=localStorage.getItem('user');}
+function logout(){localStorage.removeItem('user');location.reload();}
+function addToCart(p,pr){cart.push(p);total+=pr;document.getElementById('cartItems').innerText=cart.join(', ');document.getElementById('total').innerText=total;}
+function order(){if(cart.length==0){alert('Cart empty!');}else{alert('Order placed! Total ₹'+total+' - Cash on Delivery');cart=[];total=0;document.getElementById('cartItems').innerText='Empty';document.getElementById('total').innerText='0';}}
+if(localStorage.getItem('user')){showShop();}
+</script>
+</body>
+</html>
